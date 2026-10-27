@@ -252,6 +252,9 @@ def _split_text(
 
     spans, cell_length = split_graphemes(text, unicode_version)
 
+    if cell_position >= cell_length:
+        return text, ""
+
     # Guess initial offset
     offset = int((cell_position / cell_length) * len(spans))
     left_size = sum(map(_span_get_cell_len, spans[:offset]))
