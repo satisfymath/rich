@@ -505,10 +505,10 @@ def group(fit: bool = True) -> Callable[..., Callable[..., Group]]:
 def _is_jupyter() -> bool:  # pragma: no cover
     """Check if we're running in a Jupyter notebook."""
     try:
-        get_ipython  # type: ignore[name-defined]
-    except NameError:
+        from IPython import get_ipython
+    except ImportError:
         return False
-    ipython = get_ipython()  # type: ignore[name-defined]
+    ipython = get_ipython()
     shell = ipython.__class__.__name__
     if (
         "google.colab" in str(ipython.__class__)

@@ -196,7 +196,6 @@ def install(
 
             excepthook(exc_tuple[0], exc_tuple[1], tb)
             tb_data = {}  # clear data upon usage
-
         # replace _showtraceback instead of showtraceback to allow ipython features such as debugging to work
         # this is also what the ipython docs recommends to modify when subclassing InteractiveShell
         ip._showtraceback = ipy_display_traceback
@@ -208,7 +207,9 @@ def install(
 
     try:  # pragma: no cover
         # if within ipython, use customized traceback
-        ip = get_ipython()  # type: ignore[name-defined]
+        from IPython import get_ipython
+
+        ip = get_ipython()
         ipy_excepthook_closure(ip)
         return sys.excepthook
     except Exception:
