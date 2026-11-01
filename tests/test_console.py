@@ -601,6 +601,9 @@ def test_no_wrap() -> None:
     assert console.file.getvalue() == "foo bar ba\n"
 
 
+_test_soft_wrap_first = test_soft_wrap
+
+
 def test_soft_wrap() -> None:
     console = Console(width=10, file=io.StringIO())
     console.print("foo bar baz egg", soft_wrap=True)
@@ -963,6 +966,9 @@ def test_force_color_jupyter() -> None:
         file=io.StringIO(), _environ={"FORCE_COLOR": "1"}, force_jupyter=True
     )
     assert not console.is_terminal
+
+
+_test_force_color_first = test_force_color
 
 
 def test_force_color() -> None:
